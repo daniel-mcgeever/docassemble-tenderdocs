@@ -1,0 +1,97 @@
+---
+
+metadata:
+  title: "Framework Tender Letters"
+  short title: "Framework Letters"
+
+---
+
+# 1) Ask the user which framework they are using
+question: "Select the framework:"
+field: Framework
+choices:
+  - "UCDOPP5312 Campus Civil Engineering & Utility Works up to €1,500,000 Lot 1 (Ref. No. UCDOPP5312)"
+  - "test"
+
+---
+
+question: "What is the name of the project?"
+fields: 
+  - Project Name: Project
+    datatype: text
+
+---
+
+question: "what time should the tender be returned by?"
+fields: 
+  - Due Time: dueTime
+    datatype: time
+
+---
+
+question: "What day should the tedner be returned by?"
+fields: 
+  - Due Date: dueDate
+    datatype: date
+
+---
+
+# Optional: format the date with an ordinal (e.g. 10 -> 10th)
+code: |
+  from docassemble.base.util import ordinal
+  day_number = dueDate.day
+  dueDate_formatted = ordinal(day_number) + dueDate.strftime(" of %B, %Y")
+  dueTime_formatted = dueTime.strftime("%H:%M")
+
+---
+
+objects:
+  - companies: DAList.using(object_type=Individual, auto_gather=False)
+
+---
+# Populate the list of companies in code
+mandatory: True
+code: |
+  # Clear out any old data if re-running
+  companies.clear()
+
+  # Hard-code some sample data for demonstration:
+  # 1) Actavo
+  c = companies.appendObject()
+  c.name.text = "Actavo"                    # The 'text' attribute of c.name can store the full name
+  c.address.address = "Westland House"
+  c.address.unit = "Willow Road"
+  c.address.city = "Dublin 12."
+
+  # 2) Example Corp
+  c = companies.appendObject()
+  c.name.text = "Example Corp."
+  c.address.address = "123 Industrial Park"
+  c.address.unit = "Business Road"
+  c.address.city = "Galway"
+
+  companies.gathered = True
+
+  todays_date = today()
+  
+---
+
+# Attachment: one per companies[i]
+attachment:
+  name: "Invitation for ${ companies[i].name.text }"
+  filename: "Invitation to Tender Letter - ${companies[i].name.text}.docx"
+  variable name: companies[i].invitation_letter
+  docx template file: "Invitation.docx"
+  valid formats:
+    - docx
+    - pdf
+
+---
+mandatory: True
+question: |
+  Here are your letters for each company.
+subquestion: |
+  Download them below.
+
+attachment code: |
+  [item.invitation_letter for item in companies]

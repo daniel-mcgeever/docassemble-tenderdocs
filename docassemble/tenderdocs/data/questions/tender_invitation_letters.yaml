@@ -63,12 +63,42 @@ code: |
   c.address.unit = "Willow Road"
   c.address.city = "Dublin 12."
 
-  # 2) Example Corp
+  
   c = companies.appendObject()
-  c.name.text = "Example Corp."
-  c.address.address = "123 Industrial Park"
-  c.address.unit = "Business Road"
-  c.address.city = "Galway"
+  c.name.text = "CJ Callan Construction Ltd"
+  c.address.address = "Arthurstown"
+  c.address.unit = "Ardee"
+  c.address.city = "Co. Louth"
+
+  c = companies.appendObject()
+  c.name.text = "PAMA Construction Limited "
+  c.address.address = "Barriestown"
+  c.address.unit = "Wellingtonbridge"
+  c.address.city = "Co. Wexford"
+
+  c = companies.appendObject()
+  c.name.text = "New Century Engineering Ltd"
+  c.address.address = "Unit B8"
+  c.address.unit = "Swords Enterprise Park"
+  c.address.city = "Co. Dublin"
+
+  c = companies.appendObject()
+  c.name.text = "McAvoy Contracts Limited"
+  c.address.address = "13 Fernhill Road"
+  c.address.unit = "Annaclone"
+  c.address.city = "Banbridge"
+
+  c = companies.appendObject()
+  c.name.text = "Kilwex Limited"
+  c.address.address = "Pacelli House"
+  c.address.unit = "Naas"
+  c.address.city = "Co. Kildare"
+
+  c = companies.appendObject()
+  c.name.text = "TRIUR Construction Limited"
+  c.address.address = "13 Society St, Townparks"
+  c.address.unit = "Ballinasloe"
+  c.address.city = "Co. Galway"  
 
   companies.gathered = True
 
